@@ -74,6 +74,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->request->post()){
+            return $this->render('pay');
+        }
         return $this->render('index');
     }
 
