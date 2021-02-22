@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "760225c9c6c02a62bf6ae9ff5defbcfe",
+    "content-hash": "1dbb72a5805460a6852fef18c58d1280",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -32,7 +32,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -350,16 +350,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.72.0",
+            "version": "v7.74.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "e502d1e97ec7857038d2131ded3134af964a55c5"
+                "reference": "e45b12ff0b47746b646f51c8249210303fb076f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e502d1e97ec7857038d2131ded3134af964a55c5",
-                "reference": "e502d1e97ec7857038d2131ded3134af964a55c5",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e45b12ff0b47746b646f51c8249210303fb076f5",
+                "reference": "e45b12ff0b47746b646f51c8249210303fb076f5",
                 "shasum": ""
             },
             "require": {
@@ -403,7 +403,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2021-02-09T03:22:51+00:00"
+            "time": "2021-02-18T00:17:33+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

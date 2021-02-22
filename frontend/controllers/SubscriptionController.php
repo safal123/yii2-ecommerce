@@ -1,32 +1,68 @@
 <?php
 
-
 namespace frontend\controllers;
 
 
+use Stripe\Customer;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 use Stripe\StripeClient;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class SubscriptionController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['subscribe', 'create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['subscribe', 'create'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionSubscribe()
     {
-        if(!Yii::$app->request->post()){
-            return $this->goBack();
+        if(Yii::$app->request->post()){
+            $data = Yii::$app->request->post();
+            return $this->render('pay', ['data' => $data]);
         }
-        var_dump(Yii::$app->request->baseUrl);
-        $this->layout = false;
-        // This is your real test secret API key.
-        \Stripe\Stripe::setApiKey('sk_test_51COyMBLifWRuxBl5EkeyNdJFsCA0R3L1PBNtDpVPoArI1eJolYlmUAOjc42MY1XOYhOEKdXH2Rd1RIwC0NKn7woz00koJlZD8k');
-        $freeTrail = 'prod_IxB6aFmEo11GzS'; // Free of cost
-        $hero = 'prod_IxB5JHlOvHtrm3';  // $300 per month
-        $superHero = 'prod_IxB47TltKoq9Qi'; // $500 per month
+        return $this->render('//site/index');
+    }
 
-//        if(Yii::$app->request->post()){
+    public function actionCreate()
+    {
+        Stripe::setApiKey('sk_test_51COyMBLifWRuxBl5EkeyNdJFsCA0R3L1PBNtDpVPoArI1eJolYlmUAOjc42MY1XOYhOEKdXH2Rd1RIwC0NKn7woz00koJlZD8k');
+        header('Content-Type: application/json');
+        $stripe = PaymentIntent::create([
+            'amount' => '1000',
+            'currency' => 'usd'
+        ]);
+
+        $customer = Customer::create(
+            [
+                'email'  => Yii::$app->user->identity->email,
+            ]
+        );
+        $data = [
+            'clientSecret' => $stripe->client_secret,
+            'customer' => $customer,
+        ];
+        return $this->asJson($data);
+
+    }
+    //        if(Yii::$app->request->post()){
 //            $data = Yii::$app->request->post();
 //            $subscription = \Stripe\Subscription::create([
-//                "customer" => $customer['id'],
+//                "customer" => '99',
 //                "items" => [
 //                    ["price" => "price_1ILGj5LifWRuxBl5DC4SpzoI"],
 //                ],
@@ -37,12 +73,5 @@ class SubscriptionController extends Controller
 //        else{
 //            return $this->goBack();
 //        }
-                    return $this->render('pay');
-    }
-
-    public function actionCreate()
-    {
-        var_dump(Yii::$app->request);
-    }
 
 }

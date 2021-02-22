@@ -20,11 +20,9 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/global.css">
-    <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-</head>
+    </head>
 <body>
 <?php $this->beginBody() ?>
 
@@ -39,8 +37,6 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -67,19 +63,6 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <!-- Display a payment form -->
-        <form id="payment-form">
-            <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-            <button id="submit">
-                <div class="spinner hidden" id="spinner"></div>
-                <span id="button-text">Pay now</span>
-            </button>
-            <p id="card-error" role="alert"></p>
-            <p class="result-message hidden">
-                Payment succeeded, see the result in your
-                <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-            </p>
-        </form>
         <?= $content ?>
     </div>
 </div>
@@ -87,15 +70,10 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
 <?php $this->endBody() ?>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-<script src="/js/client.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <title>Accept a card payment</title>
-    <meta name="description" content="A demo of a card payment on Stripe"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<?php
 
+/* @var $this yii\web\View */
 
-</head>
-<body>
-    <!-- Display a payment form -->
-    <form id="payment-form">
-        <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+use yii\helpers\Html;
+$this->title = 'Subscribe';
+try {
+    $this->registerJsFile("https://js.stripe.com/v3/");
+    $this->registerJsFile("https://polyfill.io/v3/polyfill.js?version=3.52.1&features=fetch");
+    $this->registerJsFile("@web/js/client.js", ['defer' => true]);
+} catch (\yii\base\InvalidConfigException $e) {
+}
+?>
+<div>
+    <form id="stripe-form">
+        <div id="card-element"></div>
         <button id="submit">
             <div class="spinner hidden" id="spinner"></div>
             <span id="button-text">Pay now</span>
@@ -22,5 +24,4 @@
             <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
         </p>
     </form>
-</body>
-</html>
+</div>
